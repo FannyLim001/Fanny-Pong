@@ -24,7 +24,7 @@ public class PUSpeedUpController : MonoBehaviour
     {
         if(!ballCollided)
         {
-            Invoke("RemovePowerUp", manager.spawnInterval);
+            Invoke("RemovePowerUp", manager.spawnInterval+2);
         }
     }
 

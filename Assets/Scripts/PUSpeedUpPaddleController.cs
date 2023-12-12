@@ -25,7 +25,7 @@ public class PUSpeedUpPaddleController : MonoBehaviour
     {
         if (!ballCollided)
         {
-            Invoke("RemovePowerUp", manager.spawnInterval);
+            Invoke("RemovePowerUp", manager.spawnInterval + 2);
         }
     }
 
