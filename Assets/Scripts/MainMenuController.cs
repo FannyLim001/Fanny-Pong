@@ -10,4 +10,14 @@ public class MainMenuController : MonoBehaviour
         Debug.Log("Created by Fanny");
         SceneManager.LoadScene("Game");
     }
+
+    public void Credit()
+    {
+        SceneManager.LoadScene("Credit");
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

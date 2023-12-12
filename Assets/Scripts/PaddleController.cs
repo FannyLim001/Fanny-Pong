@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PaddleController : MonoBehaviour
 {
-    public int speed;
+    public float speed;
     public KeyCode upKey;
     public KeyCode downKey;
 
     private Rigidbody2D rig;
+    private Transform tf;
+
+    public float powerUpDuration = 5.0f;
+    private Vector2 originalScale;
+    private float originalSpeed;
 
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        tf = GetComponent<Transform>();
+
+        originalSpeed = speed;
     }
 
     private void Update()
@@ -42,5 +51,34 @@ public class PaddleController : MonoBehaviour
     {
         Debug.Log("TEST: " + movement);
         rig.velocity = movement;
+    }
+
+    public void Resize(float multiple)
+    {
+        originalScale = tf.localScale;
+        tf.localScale = new Vector2(originalScale.x * multiple, originalScale.y);
+
+        StartCoroutine(ResetSize());
+    }
+
+    private IEnumerator ResetSize()
+    {
+        yield return new WaitForSeconds(powerUpDuration);
+
+        tf.localScale = originalScale;
+    }
+
+    public void SpeedUp(float multiple)
+    {
+        speed *= multiple;
+
+        StartCoroutine(ResetSpeed());
+    }
+
+    private IEnumerator ResetSpeed()
+    {
+        yield return new WaitForSeconds(powerUpDuration);
+
+        speed = originalSpeed;
     }
 }
